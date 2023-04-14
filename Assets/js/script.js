@@ -42,22 +42,47 @@ for (var i = 0; i < saveButtons.length; i++) {
 // attribute of each time-block be used to do this?
 
 
-window.addEventListener("load", (event) => {
-  var descriptionList = document.getElementsByClassName('description');
 
-  for (var i = 0; i < descriptionList.length; i++) {
-    (function (descriptionIndex) {
-      descriptionList[descriptionIndex].addEventListener("click", function () {
-      console.log("descriptionIndex: " + i);
-      localStorage.getItem(this.parentElement.querySelector('.hour').innerText,
-        this.parentElement.querySelector('.description').value);
-    }
-
-    )
+function readScheduleItemsFromStorage() {
+  var scheduleItems = localStorage.getItem('scheduleItems');
+  if (scheduleItems) {
+    scheduleItems = JSON.parse(scheduleItems);
+  } else {
+    scheduleItems = [];
   }
-  (i);
+  return scheduleItems;
 }
-);
+
+
+function saveScheduleItemsToStorage(scheduleItems) {
+  localStorage.setItem('scheduleItems', JSON.stringify(scheduleItems));
+}
+//window.addEventListener("load", (event) => {
+
+//document.querySelectorAll('textarea').forEach((elem) => elem.value = "Desiered value");
+
+loadSchedule();
+
+function loadSchedule() {
+  var items = readScheduleItemsFromStorage();
+  console.log(items);
+  //var descriptionList = document.getElementsByClassName('description');
+  var descriptionList = document.querySelectorAll('.description');
+  for (var i = 0; i< descriptionList.length; i++){
+
+  }
+  descriptionList.forEach(descr => {
+    descr.innerHTML = 
+  })
+  // for (var i = 0; i < descriptionList.length; i++) {
+  //   (function (descriptionIndex) {
+  //     descriptionList[descriptionIndex].addEventListener("load", function () {
+  //       console.log("descriptionIndex: " + i);
+  //       localStorage.getItem(this.parentElement.querySelector('.hour').innerText,
+  //         this.parentElement.querySelector('.description').value);
+  //     }
+  // )})}
+}
 
 
 // $('#userInput').append("<br>");
