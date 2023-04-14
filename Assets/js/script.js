@@ -121,7 +121,21 @@ function loadSchedule() {
 var todayDisplay = dayjs().format("dddd, MMMM D");
 $("#currentDay").text(todayDisplay);
 
+var currentTime = dayjs().format("H");
 
+var hourBlocks = document.querySelectorAll('.hour');
 
+for (var i = 0; i<hourBlocks.length; i++) {
+  if (hourBlocks[i].id < currentTime) {
+    hourBlocks[i].parentElement.setAttribute('class','past');
+  }
+  if (hourBlocks[i].id == currentTime) {
+    hourBlocks[i].parentElement.setAttribute('class', 'present');
+  }
+  if (hourBlocks[i].id > currentTime) {
+    hourBlocks[i].parentElement.setAttribute('class', 'future');
+  }
+
+}
 
 
