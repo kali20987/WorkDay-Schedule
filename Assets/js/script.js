@@ -21,12 +21,26 @@
 
 var saveButtons = document.getElementsByClassName('saveBtn');
 
+
+
 for (var i = 0; i < saveButtons.length; i++) {
   (function (savedBtnIndex) {
     saveButtons[savedBtnIndex].addEventListener("click", function () {
       console.log("savedBtnIndex: " + savedBtnIndex);
-      localStorage.setItem(this.parentElement.querySelector('.hour').innerText,
-        this.parentElement.querySelector('.description').value);
+      //localStorage.setItem(this.parentElement.querySelector('.hour').innerText,
+      //  this.parentElement.querySelector('.description').value);
+
+      var newScheduleItem = {
+        text: this.parentElement.querySelector('.description').value,
+        index: savedBtnIndex,
+      };
+
+      // newScheduleItem.scheduleText = ;
+      // newScheduleItem.scheduleIndex = ;
+      //scheduleItems.push(this.parentElement.querySelector('.description').value);
+
+      scheduleItems.push(newScheduleItem);
+      saveScheduleItemsToStorage(scheduleItems);
     })
   })(i);
 }
@@ -40,6 +54,10 @@ for (var i = 0; i < saveButtons.length; i++) {
 // TODO: Add code to get any user input that was saved in localStorage and set
 // the values of the corresponding textarea elements. HINT: How can the id
 // attribute of each time-block be used to do this?
+
+
+// add project to local storage
+var scheduleItems = readScheduleItemsFromStorage();
 
 
 
@@ -68,12 +86,14 @@ function loadSchedule() {
   console.log(items);
   //var descriptionList = document.getElementsByClassName('description');
   var descriptionList = document.querySelectorAll('.description');
-  for (var i = 0; i< descriptionList.length; i++){
-
+  for (var i = 0; i < descriptionList.length; i++) {
+    for (var j = 0; j < items.length; j++) {
+      if (items[j].index == i) {
+        descriptionList[i].innerHTML = items[j].text;
+      }
+    }
   }
-  descriptionList.forEach(descr => {
-    descr.innerHTML = 
-  })
+
   // for (var i = 0; i < descriptionList.length; i++) {
   //   (function (descriptionIndex) {
   //     descriptionList[descriptionIndex].addEventListener("load", function () {
